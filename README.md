@@ -15,9 +15,9 @@ Before running the application, ensure you have the following dependencies insta
 2. Navigate to the project directory in your terminal.
 
 ## Usage
-1. Run the `imdb_scrape.py` script using Python.
+1. Run the `Main.py` script using Python.
    ```bash
-   python imdb_scrape.py
+   python Main.py
 2.The script will scrape IMDb's Top 100 chart, extract movie information, and save it to a CSV file named movie_info.csv in the project directory
 
 #Project Structure
