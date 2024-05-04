@@ -13,7 +13,7 @@ if ul_element:
     link_elements = ul_element.find_all('a', href=True,class_='ipc-title-link-wrapper')
     
     # Extract the URLs from the <a> elements
-    for link_element in link_elements[:10]:
+    for link_element in link_elements[:250]:
         movie_url = link_element['href']
         # Append the URL to the list of movie links
         movie_links.append("https://www.imdb.com" + movie_url)
@@ -42,14 +42,12 @@ for movie_url in movie_links:
     
     title = soup.find('span', class_='hero__primary-text').text.strip()
     rating = soup.find('span', class_='sc-bde20123-1 cMEQkK').text.strip()
-   # year = soup.find('div', class_='sc-b7c53eda-0 dUpRPQ','a',class_='ipc-link ipc-link--baseAlt ipc-link--inherit-color').get_text(strip=True)
     year = soup.find('div', {'class': 'sc-b7c53eda-0 dUpRPQ'}).find('a', {'class': 'ipc-link ipc-link--baseAlt ipc-link--inherit-color'}).get_text(strip=True)
     genre = soup.find('span',class_='ipc-chip__text').text.strip()
     director = soup.find('a', class_='ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link').get_text(strip=True)
     actors_link = soup.find('a',class_='ipc-metadata-list-item__icon-link')['href']
     actors_link = "https://m.imdb.com/" + actors_link
     actors = actor_name(actors_link)
-    #actors = soup.find('a',class_='title-cast-item__actor')
     img = soup.find('img',class_='ipc-image')['src']
     # Store movie information in a dictionary
     movie_detail = {
@@ -63,10 +61,12 @@ for movie_url in movie_links:
     }
     
     movie_info.append(movie_detail)
- #Print movie information
-#for movie in movie_info:
-#    print(movie)
+
     
     
 df = pd.DataFrame(movie_info)
 print(df)#
+# Export the DataFrame to a CSV file
+df.to_csv('movie_info.csv', index=False)
+# Print a message indicating that the CSV file has been saved
+print("Movie information has been saved to 'movie_info.csv'")
