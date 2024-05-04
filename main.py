@@ -63,5 +63,10 @@ for movie_url in movie_links:
     
     movie_info.append(movie_detail)
 # Print movie information
-for movie in movie_info:
-    print(movie)
+#for movie in movie_info:
+#    print(movie)
+    
+    
+df = pd.DataFrame(movie_info)
+
+print(df)
